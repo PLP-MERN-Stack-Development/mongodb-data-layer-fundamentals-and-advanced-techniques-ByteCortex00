@@ -1,59 +1,184 @@
-# MongoDB Fundamentals - Week 1
+# MongoDB Week 1 Assignment - Book Store Database
 
-## Setup Instructions
+## 📚 Project Overview
+This project demonstrates MongoDB fundamentals including database setup, CRUD operations, advanced queries, aggregation pipelines, and indexing optimization.
 
-Before you begin this assignment, please make sure you have the following installed:
+## 🎯 Assignment Completion
 
-1. **MongoDB Community Edition** - [Installation Guide](https://www.mongodb.com/docs/manual/administration/install-community/)
-2. **MongoDB Shell (mongosh)** - This is included with MongoDB Community Edition
-3. **Node.js** - [Download here](https://nodejs.org/)
+### Tasks Completed
+- ✅ Task 1: MongoDB Setup (Atlas Database)
+- ✅ Task 2: Basic CRUD Operations
+- ✅ Task 3: Advanced Queries (Filtering, Projection, Sorting, Pagination)
+- ✅ Task 4: Aggregation Pipeline
+- ✅ Task 5: Indexing for Performance
 
-### Node.js Package Setup
+## 🗂️ Database Structure
 
-Once you have Node.js installed, run the following commands in your assignment directory:
+**Database Name:** `plp_bookstore`  
+**Collection Name:** `books`
 
+### Document Schema
+Each book document contains:
+- `title` (string) - Book title
+- `author` (string) - Author name
+- `genre` (string) - Book genre
+- `published_year` (number) - Publication year
+- `price` (number) - Book price
+- `in_stock` (boolean) - Availability status
+- `pages` (number) - Number of pages
+- `publisher` (string) - Publisher name
+
+## 📦 Installation & Setup
+
+### Prerequisites
+- Node.js (v18 or higher)
+- MongoDB Atlas account (or local MongoDB installation)
+- npm (comes with Node.js)
+
+### Setup Steps
+
+1. **Clone the repository:**
+   ```bash
+   git clone <your-repo-url>
+   cd <repo-folder>
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install mongodb
+   ```
+
+3. **Configure MongoDB connection:**
+   - Open `insert_books.js` and `queries.js`
+   - Update the `uri` variable with your MongoDB connection string
+   - For Atlas: Use the connection string from your cluster
+   - For local: Use `mongodb://localhost:27017`
+
+## 🚀 Running the Scripts
+
+### 1. Insert Sample Data
+Populates the database with 12 sample books:
 ```bash
-# Initialize a package.json file
-npm init -y
-
-# Install the MongoDB Node.js driver
-npm install mongodb
+node insert_books.js
 ```
 
-## Assignment Overview
+**Expected Output:**
+```
+✅ Connected to MongoDB Atlas successfully!
+📊 Current books in collection: 0
+📚 Inserting books...
+✅ 12 books inserted successfully!
+```
 
-This week focuses on MongoDB fundamentals including:
-- Creating and connecting to MongoDB databases
-- CRUD operations (Create, Read, Update, Delete)
-- MongoDB queries and filters
-- Aggregation pipelines
-- Indexing for performance
+### 2. Execute All Queries
+Runs all assignment tasks (CRUD, Advanced Queries, Aggregation, Indexing):
+```bash
+node queries.js
+```
 
-## Submission
+**Expected Output:**
+- Complete execution of all tasks
+- Performance metrics for indexed vs non-indexed queries
+- Summary statistics of the database
 
-Complete all the exercises in this assignment and push your code to GitHub using the provided GitHub Classroom link.
+## 📋 Features Demonstrated
 
-## Getting Started
+### CRUD Operations
+- **Create:** Insert multiple book documents
+- **Read:** Query books by genre, author, year
+- **Update:** Modify book prices
+- **Delete:** Remove books by title
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Install MongoDB locally or set up a MongoDB Atlas account
-4. Run the provided `insert_books.js` script to populate your database
-5. Complete the tasks in the assignment document
+### Advanced Queries
+- Complex filtering (multiple conditions)
+- Field projection (selective field retrieval)
+- Sorting (ascending/descending)
+- Pagination (limit and skip)
 
-## Files Included
+### Aggregation Pipeline
+- Calculate average price by genre
+- Find authors with most books
+- Group books by publication decade
 
-- `Week1-Assignment.md`: Detailed assignment instructions
-- `insert_books.js`: Script to populate your MongoDB database with sample book data
+### Indexing
+- Single field index on `title`
+- Compound index on `author` and `published_year`
+- Performance analysis using `explain()`
 
-## Requirements
+## 📊 Sample Queries
 
-- Node.js (v18 or higher)
-- MongoDB (local installation or Atlas account)
-- MongoDB Shell (mongosh) or MongoDB Compass
+### Find Fiction Books
+```javascript
+db.books.find({ genre: 'Fiction' })
+```
 
-## Resources
+### Find Books Published After 1950
+```javascript
+db.books.find({ published_year: { $gt: 1950 } })
+```
 
+### Average Price by Genre
+```javascript
+db.books.aggregate([
+  {
+    $group: {
+      _id: '$genre',
+      avgPrice: { $avg: '$price' }
+    }
+  }
+])
+```
+
+## 🔍 Performance Optimization
+
+### Indexes Created
+1. **Single Index:** `title` (ascending)
+2. **Compound Index:** `author` (ascending), `published_year` (descending)
+
+### Performance Improvement
+- Index usage reduces document examination
+- Faster query execution times
+- Efficient data retrieval for common queries
+
+## 📁 Project Structure
+```
+.
+├── insert_books.js       # Script to populate database
+├── queries.js            # All assignment queries
+├── README.md            # This file
+├── package.json         # Node.js dependencies
+└── screenshot.png       # MongoDB Atlas screenshot
+```
+
+## 🛠️ Technologies Used
+- **Database:** MongoDB Atlas / MongoDB Community Edition
+- **Runtime:** Node.js
+- **Driver:** MongoDB Node.js Driver (mongodb npm package)
+- **Tools:** MongoDB Shell (mongosh), MongoDB Compass
+
+## 📝 Notes
+- The database contains 12 sample books across various genres
+- All queries are fully functional and tested
+- Indexes significantly improve query performance
+- Connection string should be kept private (use environment variables in production)
+
+## 🎓 Learning Outcomes
+- Understanding MongoDB document structure
+- Proficiency in MongoDB query language
+- Knowledge of aggregation framework
+- Understanding of database indexing
+- Performance optimization techniques
+
+## 👤 Author
+**Student Name:** Peter Waweru 
+**Assignment:** MongoDB Week 1 - Data Layer Fundamentals  
+**Date:** 17 October 2025
+
+## 📧 Support
+For questions or issues, please contact your instructor or refer to:
 - [MongoDB Documentation](https://docs.mongodb.com/)
 - [MongoDB University](https://university.mongodb.com/)
-- [MongoDB Node.js Driver](https://mongodb.github.io/node-mongodb-native/) 
+
+---
+
+**Assignment Status:** ✅ Complete
